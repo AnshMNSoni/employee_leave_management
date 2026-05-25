@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- List View -->
+    <record id="view_leave_request_list" model="ir.ui.view">
+        <field name="name">employee.leave.list</field>
+        <field name="model">employee.leave</field>
+        <field name="arch" type="xml">
+            <list string="Leave Requests">
+                <field name="employee_id"/>
+                <field name="leave_type_id"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="status"/>
+                <field name="total_days"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_leave_request_form" model="ir.ui.view">
+        <field name="name">employee.leave.form</field>
+        <field name="model">employee.leave</field>
+        <field name="arch" type="xml">
+            <form string="Leave Request">
+                <header>
+                    <button name="%(action_leave_approval_wizard)d" type="action" string="Approve / Reject" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="employee_id"/>
+                        <field name="leave_type_id"/>
+                    </group>
+                    <group>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                        <field name="total_days"/>
+                    </group>
+                    <group>
+                        <field name="reason"/>
+                        <field name="status"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_leave_request" model="ir.actions.act_window">
+        <field name="name">Leave Requests</field>
+        <field name="res_model">employee.leave</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_employee_leave_root" name="Employee Leaves" sequence="10"/>
+    <menuitem id="menu_employees" name="Employees" parent="menu_employee_leave_root" action="action_employee_management" sequence="1"/>
+    <menuitem id="menu_leave_types" name="Leave Types" parent="menu_employee_leave_root" action="action_leave_type" sequence="2"/>
+    <menuitem id="menu_leave_requests" name="Leave Requests" parent="menu_employee_leave_root" action="action_leave_request" sequence="3"/>
+
+</odoo>

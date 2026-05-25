@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- List View -->
+    <record id="view_employee_list" model="ir.ui.view">
+        <field name="name">employee.management.list</field>
+        <field name="model">employee.management</field>
+        <field name="arch" type="xml">
+            <list string="Employees">
+                <field name="name"/>
+                <field name="email"/>
+                <field name="phone"/>
+                <field name="department"/>
+                <field name="job_title"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_employee_form" model="ir.ui.view">
+        <field name="name">employee.management.form</field>
+        <field name="model">employee.management</field>
+        <field name="arch" type="xml">
+            <form string="Employee">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="email"/>
+                        <field name="phone"/>
+                    </group>
+                    <group>
+                        <field name="department"/>
+                        <field name="job_title"/>
+                        <field name="joining_date"/>
+                    </group>
+
+                    <notebook>
+                        <page string="Leave Requests">
+                            <field name="leave_request_ids">
+                                <list>
+                                    <field name="leave_type_id"/>
+                                    <field name="start_date"/>
+                                    <field name="end_date"/>
+                                    <field name="status"/>
+                                    <field name="total_days"/>
+                                </list>
+                                <form>
+                                    <group>
+                                        <field name="leave_type_id"/>
+                                        <field name="start_date"/>
+                                        <field name="end_date"/>
+                                        <field name="reason"/>
+                                        <field name="status"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_employee_management" model="ir.actions.act_window">
+        <field name="name">Employees</field>
+        <field name="res_model">employee.management</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>
