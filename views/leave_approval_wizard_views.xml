@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_leave_approval_wizard_form" model="ir.ui.view">
+        <field name="name">employee.leave.approval.wizard.form</field>
+        <field name="model">employee.leave.approval.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Approve / Reject Leave">
+                <sheet>
+                    <group>
+                        <field name="leave_id" readonly="1"/>
+                        <field name="action"/>
+                        <field name="manager_note"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_confirm" string="Confirm" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_leave_approval_wizard" model="ir.actions.act_window">
+        <field name="name">Approve / Reject Leave</field>
+        <field name="res_model">employee.leave.approval.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_leave_id': active_id}</field>
+    </record>
+
+</odoo>
