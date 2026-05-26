@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+.leave-request-wrapper {
+    font-family: 'Outfit', sans-serif;
+    background: radial-gradient(circle at 10% 20%, #f9f9f9 0%, #e5e7eb 90%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+.leave-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid #e5e7eb;
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
+    width: 100%;
+    max-width: 600px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.leave-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 30px 50px rgba(0, 0, 0, 0.08);
+}
+.leave-header {
+    background: #000000;
+    padding: 35px 40px;
+    color: #ffffff;
+    position: relative;
+}
+.leave-header h2 {
+    margin: 0;
+    font-weight: 700;
+    font-size: 28px;
+    letter-spacing: -0.5px;
+    color: #ffffff;
+}
+.leave-header p {
+    margin: 10px 0 0 0;
+    opacity: 0.8;
+    font-size: 15px;
+    font-weight: 300;
+    color: #ffffff;
+}
+.leave-body {
+    padding: 40px;
+}
+.form-group {
+    margin-bottom: 25px;
+}
+.form-label {
+    display: block;
+    font-weight: 600;
+    font-size: 13px;
+    color: #1f2937;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.form-control, .form-select {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 15px;
+    color: #1f2937;
+    background-color: #ffffff;
+    border: 1.5px solid #d1d5db;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+}
+.form-control:focus, .form-select:focus {
+    border-color: #000000;
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.08);
+    background-color: #ffffff;
+}
+.date-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+@media (max-width: 576px) {
+    .date-grid {
+        grid-template-columns: 1fr;
+    }
+}
+.duration-badge {
+    display: inline-flex;
+    align-items: center;
+    background: #f3f4f6;
+    color: #000000;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 10px;
+    opacity: 0;
+    transform: translateY(5px);
+    transition: all 0.3s ease;
+    border: 1px solid #e5e7eb;
+}
+.duration-badge.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+.btn-submit {
+    background: #000000;
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    padding: 15px 30px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.btn-submit:hover {
+    background: #1f2937;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+.btn-submit:active {
+    transform: translateY(1px);
+}
+
+.thank-you-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid #e5e7eb;
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
+    width: 100%;
+    max-width: 500px;
+    padding: 50px 40px;
+    text-align: center;
+}
+.success-icon {
+    background: #000000;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 30px auto;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    color: #ffffff;
+    font-size: 40px;
+}
+.thank-you-card h2 {
+    font-weight: 700;
+    font-size: 26px;
+    color: #1f2937;
+    margin-bottom: 15px;
+}
+.thank-you-card p {
+    color: #4b5563;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+.btn-back {
+    display: inline-block;
+    background: #000000;
+    color: #ffffff !important;
+    text-decoration: none;
+    border-radius: 12px;
+    padding: 12px 30px;
+    font-size: 15px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.btn-back:hover {
+    background: #1f2937;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}

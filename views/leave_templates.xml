@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="leave_request_page" name="Leave Request Page">
+        <t t-call="website.layout">
+            <div class="leave-request-wrapper">
+                <link rel="stylesheet" href="/employee_leave_management/static/src/css/leave_request.css"/>
+
+                <div class="leave-card">
+                    <div class="leave-header">
+                        <h2>Submit Leave Request</h2>
+                        <p>Fill out the form below to apply for a leave. Your manager will review it shortly.</p>
+                    </div>
+                    <div class="leave-body">
+                        <form action="/leave/submit" method="post" id="leaveForm">
+                            <!-- CSRF -->
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="employee_id">Employee</label>
+                                <select name="employee_id" id="employee_id" class="form-select" required="1">
+                                    <option value="" disabled="disabled" selected="selected">Select your profile...</option>
+                                    <t t-foreach="employees" t-as="emp">
+                                        <option t-att-value="emp.id"><t t-esc="emp.name"/> (<t t-esc="emp.department or 'No Department'"/>)</option>
+                                    </t>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="leave_type_id">Leave Type</label>
+                                <select name="leave_type_id" id="leave_type_id" class="form-select" required="1">
+                                    <option value="" disabled="disabled" selected="selected">Select leave type...</option>
+                                    <t t-foreach="leave_types" t-as="lt">
+                                        <option t-att-value="lt.id"><t t-esc="lt.name"/> (Max: <t t-esc="lt.max_days"/> days)</option>
+                                    </t>
+                                </select>
+                            </div>
+
+                            <div class="date-grid">
+                                <div class="form-group">
+                                    <label class="form-label" for="start_date">Start Date</label>
+                                    <input type="date" name="start_date" id="start_date" class="form-control" required="1"/>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="end_date">End Date</label>
+                                    <input type="date" name="end_date" id="end_date" class="form-control" required="1"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="margin-top: -15px;">
+                                <div id="durationBadge" class="duration-badge">
+                                    <span id="durationDays">0</span> days requested
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="reason">Reason for Leave</label>
+                                <textarea name="reason" id="reason" class="form-control" rows="4" placeholder="Please provide detailed reason..." required="1"/>
+                            </div>
+
+                            <button type="submit" class="btn-submit">
+                                Submit Request
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const startDateInput = document.getElementById('start_date');
+                    const endDateInput = document.getElementById('end_date');
+                    const durationBadge = document.getElementById('durationBadge');
+                    const durationDays = document.getElementById('durationDays');
+
+                    function calculateDays() {
+                        const startVal = startDateInput.value;
+                        const endVal = endDateInput.value;
+
+                        if (startVal &amp;&amp; endVal) {
+                            const start = new Date(startVal);
+                            const end = new Date(endVal);
+                            
+                            // Make sure end date is not before start date in UI constraint
+                            endDateInput.min = startVal;
+                            
+                            if (end &gt;= start) {
+                                const diffTime = Math.abs(end - start);
+                                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+                                durationDays.textContent = diffDays;
+                                durationBadge.classList.add('visible');
+                            } else {
+                                durationBadge.classList.remove('visible');
+                            }
+                        } else {
+                            durationBadge.classList.remove('visible');
+                        }
+                    }
+
+                    startDateInput.addEventListener('change', calculateDays);
+                    endDateInput.addEventListener('change', calculateDays);
+                });
+            </script>
+        </t>
+    </template>
+
+    <template id="thank_you_page" name="Thank You">
+        <t t-call="website.layout">
+            <div class="leave-request-wrapper">
+                <link rel="stylesheet" href="/employee_leave_management/static/src/css/leave_request.css"/>
+<div class="thank-you-card">
+                    <div class="success-icon">✓</div>
+                    <h2>Request Submitted!</h2>
+                    <p>Your leave request has been successfully submitted. You can check its status in the backend system under your profile.</p>
+                    <a href="/leave-request" class="btn-back">Apply for Another Leave</a>
+                </div>
+            </div>
+        </t>
+    </template>
+
+</odoo>
